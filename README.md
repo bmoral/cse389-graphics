@@ -1,5 +1,5 @@
 # cse389-graphics
-**Wed 1/24/2017:** 
+**Wed 1/24/2018:** 
   OpenGL is working and can open sample `main.cpp`(window) without apparent issues using `g++` compiler.
   
   To install required libraries:
@@ -19,3 +19,9 @@
   g++ glad.o -c -ldl
   g++ main.cpp -lglfw -lGLEW -lGL -ldl
   ```
+
+  **Wed 2/1/2018:**
+  Follow instructions [here] (https://www.cs.nmt.edu/~amyk/Graphics/Environment/) for Glitter.  
+  To fix the ```glad/glad.h`` not found error go to [http://glad.dav1d.de/] choose language C/C++, Specification: OpenGL, API: 4.5 (or whichever you need), and Profile: Core. After that hit generate and download the glad.zip file, insert the glad and KHR folders to your ```/usr/include/``` directory, and the glad.c file in to your project. In the linker add library ```dl```.
+  
+  
