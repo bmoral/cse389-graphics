@@ -43,7 +43,7 @@
   [triangle]: https://github.com/bmoral/cse389-graphics/blob/master/misc/triangle-2118.png
   [triangle_wire]: https://github.com/bmoral/cse389-graphics/blob/master/misc/triangle_wire-2118.png
   
-  #### Questions
+  #### Museum Plan
 ###### 1. What is the theme of your museum?
 > The theme that we chose is a roman theme based around the time frame of the beginning (1430s) to the zenith (1520s) of the renaissance.
 ###### 2. How many rooms will your museum have?
