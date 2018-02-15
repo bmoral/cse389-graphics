@@ -58,3 +58,6 @@
     
 ###### 6. You must have at least FOUR “paintings” in your museum.  What were you planning to use for your pictures? Have you already started looking for textures that can be applied as “pictures”? Will your pictures be hung on the wall? Will they be murals?  Do you have a completely different idea of how these paintings will be added to your museum?
 > We have not decided on the paintings that we plan to use. There are several paintings that can be easily textured to a simple painting frame model, however we would like to look into some more unconventional methods of displaying them. The pictures will most likely be hung on the wall inside a framed model, however, we may have a painting on the ceiling, depending on how complex it will be to texture it to a dome shape without it looking strange. 
+
+## Weekly Scrotum 2018/2/14
+Link to .blend file [museum.blend](https://github.com/bmoral/cse389-graphics/blob/master/misc/models/museum.blend)
