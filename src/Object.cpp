@@ -103,9 +103,9 @@ void Object::load(GLuint & program)
 ******************************************************************************/
 void Object::draw()
 {
-	glBindVertexArray(buffer);
+	//glBindVertexArray(buffer);
 	glDrawArrays(GL_TRIANGLES, 0, numVert);
-	glBindVertexArray(0);
+	//glBindVertexArray(0);
 }
 
 /******************************************************************************
