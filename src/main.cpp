@@ -123,14 +123,14 @@ int main(){
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     Object museumWalls = Object("./misc/objects/test.obj");
-    //GLuint museumVAO;
+    GLuint museumVAO;
 
-    //glGenVertexArrays(1, &museumVAO);
-   ///glBindVertexArray(museumVAO);
+    glGenVertexArrays(1, &museumVAO);
+    glBindVertexArray(museumVAO);
     museumWalls.load(shaderProgram);
-    museumWalls.draw();
+    //museumWalls.draw();
 
-    //glBindVertexArray(0);
+    glBindVertexArray(0);
     // render loop
     // -----------
     while(!glfwWindowShouldClose(window)){
@@ -146,7 +146,7 @@ int main(){
 
         // draw our first triangle
         glUseProgram(shaderProgram);
-       // glBindVertexArray(museumVAO);
+        glBindVertexArray(museumVAO);
         museumWalls.draw();
         glBindVertexArray(0);
         //glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
