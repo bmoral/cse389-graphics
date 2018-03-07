@@ -53,7 +53,7 @@ void Object::load(GLuint & program)
 {
 	getObjInfo(title);
 	// now we need to create a buffer object
-	int size = (numVert * sizeof(glm::vec4));
+	unsigned long size = (numVert * sizeof(glm::vec4));
 
 	// make sure to put the color and the vertices into the same buffer
 	glGenBuffers(1, &buffer);
@@ -103,9 +103,7 @@ void Object::load(GLuint & program)
 ******************************************************************************/
 void Object::draw()
 {
-	//glBindVertexArray(buffer);
 	glDrawArrays(GL_TRIANGLES, 0, numVert);
-	//glBindVertexArray(0);
 }
 
 /******************************************************************************

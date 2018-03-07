@@ -6,6 +6,10 @@
 ******************************************************************************/
 
 #pragma once
+#ifndef MODEL_VIEW_OBJECT_H
+#define MODEL_VIEW_OBJECT_H
+#endif
+
 #include <string>
 //#include <GL/glew.h>
 #include <glad/glad.h>
@@ -30,10 +34,10 @@ public:
 	~Object();
 
 private:
-	int numVert;
-	int numNorm;
-	int numFaces;
-	int numIndex;
+	unsigned long numVert;
+	unsigned long numNorm;
+	unsigned long numFaces;
+	unsigned long numIndex;
 	
 	std::vector<glm::vec4> vertList;
 	std::vector<glm::vec4> tempVertList;

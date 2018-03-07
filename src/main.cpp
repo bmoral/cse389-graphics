@@ -10,18 +10,41 @@ void processInput(GLFWwindow* window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-const char *vertexShaderSource = "#version 330 core\n"
-        "layout (location = 0) in vec3 aPos;\n"
+const char *vertexShaderSource = "#version 330\n"
+        "in vec4 vPosition;\n"
+        "in vec4 vColor;\n"
+        "out vec4 color;\n"
+        "uniform vec3 theta;\n"
         "void main()\n"
         "{\n"
-        "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+        "   //Compute the sines and cosines of theta for each of\n"
+        "   //the three axes in one computation.\n"
+        "   vec3 angles = radians(theta);\n"
+        "   vec3 c = cos(angles);\n"
+        "   vec3 s = sin(angles);\n"
+        "   //Remember: these matrices are column major.\n"
+        "   mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,\n"
+        "                  0.0, c.x, s.x, 0.0,\n"
+        "                  0.0, -s.x, c.x, 0.0,\n"
+        "                  0.0, 0.0, 0.0, 1.0);\n"
+        "   mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,\n"
+        "                  0.0, 1.0, 0.0, 0.0,\n"
+        "                  s.y, 0.0, c.y, 0.0,\n"
+        "                  0.0, 0.0, 0.0, 1.0);\n"
+        "   mat4 rz = mat4(c.z, -s.z, 0.0, 0.0,\n"
+        "                  s.z, c.z, 0.0, 0.0,\n"
+        "                  0.0, 0.0, 1.0, 0.0,\n"
+        "                  0.0, 0.0, 0.0, 1.0);\n"
+        "   color = vColor;\n"
+        "   gl_Position = rz * ry * rx * vPosition;\n"
         "}\0";
 
-const char *fragmentShaderSource = "#version 330 core\n"
-        "out vec4 FragColor;\n"
+const char *fragmentShaderSource = "#version 330\n"
+        "in vec4 color;\n"
+        "out vec4 fColor;\n"
         "void main()\n"
         "{\n"
-        "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+        "   fColor = color;\n"
         "}\n\0";
 
 
@@ -31,12 +54,12 @@ int main(){
     // ------------------------------
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Chavez_Morales Triangle", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Chavez_Morales Load Objects", NULL, NULL);
     if(window == NULL){
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -54,8 +77,13 @@ int main(){
 
     // build and compile our shader program
     // ------------------------------------
+
+    // create a vertex array object (VAO) ***
+    GLuint vao;
+    glGenVertexArrays(1, &vao);
+
     // vertex shader
-    int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
     // check for shader compile errors
@@ -92,6 +120,9 @@ int main(){
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
+
+
+
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     float vertices[] = {
@@ -123,32 +154,37 @@ int main(){
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     Object museumWalls = Object("./misc/objects/test.obj");
-    GLuint museumVAO;
+    GLfloat Theta[3] = {0.0, 0.0, 0.0};
+    GLint theta;
 
-    glGenVertexArrays(1, &museumVAO);
-    glBindVertexArray(museumVAO);
+
+    // Link to out vao and prep to display ****
+    glUseProgram(shaderProgram);
+    glBindVertexArray(vao);
     museumWalls.load(shaderProgram);
-    //museumWalls.draw();
 
-    glBindVertexArray(0);
+    glBindVertexArray(vao);
+    theta = glGetUniformLocation(shaderProgram, "theta");
+
+    glEnable(GL_DEPTH_TEST);
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     // render loop
     // -----------
     while(!glfwWindowShouldClose(window)){
 
         // input
         // -----
-        processInput(window);
+        //processInput(window);
 
         // render
         // ------
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
         // draw our first triangle
-        glUseProgram(shaderProgram);
-        glBindVertexArray(museumVAO);
-        museumWalls.draw();
-        glBindVertexArray(0);
+        //glUseProgram(shaderProgram);
+        //glBindVertexArray(museumVAO);
+        //museumWalls.draw();
+        //glBindVertexArray(0);
         //glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
         //glDrawArrays(GL_TRIANGLES, 0, 3);
         // glBindVertexArray(0); // no need to unbind it every time
@@ -156,6 +192,16 @@ int main(){
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glUniform3fv(theta, 1, Theta);
+        museumWalls.draw();
+
+        Theta[0] += 0.1;
+
+        if(Theta[0] > 360.0) {
+        	Theta[0] -= 360.0;
+        }
+
         glfwPollEvents();
     }
 
