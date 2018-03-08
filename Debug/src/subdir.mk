@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Object.cpp \
+../src/ShaderProgram.cpp \
 ../src/main.cpp 
 
 C_SRCS += \
@@ -12,11 +13,13 @@ C_SRCS += \
 
 OBJS += \
 ./src/Object.o \
+./src/ShaderProgram.o \
 ./src/glad.o \
 ./src/main.o 
 
 CPP_DEPS += \
 ./src/Object.d \
+./src/ShaderProgram.d \
 ./src/main.d 
 
 C_DEPS += \

@@ -1,4 +1,5 @@
 #include "Object.h"
+#include "ShaderProgram.h"
 //#include <glad/glad.h>
 
 //#include <iostream>
@@ -10,42 +11,26 @@ void processInput(GLFWwindow* window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-const char *vertexShaderSource = "#version 330\n"
-        "in vec4 vPosition;\n"
-        "in vec4 vColor;\n"
-        "out vec4 color;\n"
-        "uniform vec3 theta;\n"
-        "void main()\n"
-        "{\n"
-        "   //Compute the sines and cosines of theta for each of\n"
-        "   //the three axes in one computation.\n"
-        "   vec3 angles = radians(theta);\n"
-        "   vec3 c = cos(angles);\n"
-        "   vec3 s = sin(angles);\n"
-        "   //Remember: these matrices are column major.\n"
-        "   mat4 rx = mat4(1.0, 0.0, 0.0, 0.0,\n"
-        "                  0.0, c.x, s.x, 0.0,\n"
-        "                  0.0, -s.x, c.x, 0.0,\n"
-        "                  0.0, 0.0, 0.0, 1.0);\n"
-        "   mat4 ry = mat4(c.y, 0.0, -s.y, 0.0,\n"
-        "                  0.0, 1.0, 0.0, 0.0,\n"
-        "                  s.y, 0.0, c.y, 0.0,\n"
-        "                  0.0, 0.0, 0.0, 1.0);\n"
-        "   mat4 rz = mat4(c.z, -s.z, 0.0, 0.0,\n"
-        "                  s.z, c.z, 0.0, 0.0,\n"
-        "                  0.0, 0.0, 1.0, 0.0,\n"
-        "                  0.0, 0.0, 0.0, 1.0);\n"
-        "   color = vColor;\n"
-        "   gl_Position = rz * ry * rx * vPosition;\n"
-        "}\0";
+//modelselection
+int modelSelection = 0;
+// create a vertex array object (VAO) ***
+GLuint vao[2];
+//glGenVertexArrays(2, &vao);
 
-const char *fragmentShaderSource = "#version 330\n"
-        "in vec4 color;\n"
-        "out vec4 fColor;\n"
-        "void main()\n"
-        "{\n"
-        "   fColor = color;\n"
-        "}\n\0";
+/******************************************************************************
+
+	KEYBOARD SWITCH COMMANDS
+
+******************************************************************************/
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        exit(EXIT_SUCCESS);
+    if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+        modelSelection = (modelSelection + 1) % 2; //mod num_models
+        glBindVertexArray(vao[modelSelection]);
+    }
+} // end key_callback()
 
 
 int main(){
@@ -75,61 +60,24 @@ int main(){
         return -1;
     }
 
-    // build and compile our shader program
-    // ------------------------------------
 
     // create a vertex array object (VAO) ***
-    GLuint vao;
-    glGenVertexArrays(1, &vao);
+    //GLuint vao[2];
+    glGenVertexArrays(2, vao);
 
-    // vertex shader
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(vertexShader);
-    // check for shader compile errors
-    int success;
-    char infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-    }
-    // fragment shader
-    int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fragmentShader);
-    // check for shader compile errors
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-    }
-    // link shaders
-    GLuint shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-    // check for linking errors
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-    }
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    //set our shader program
+    GLuint shaderProgram = ShaderProgram();
 
 
 
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
-    float vertices[] = {
-            -0.5f, -0.5f, 0.0f, // left
-            0.5f, -0.5f, 0.0f, // right
-            0.0f,  0.5f, 0.0f  // top
-    };
+    //float vertices[] = {
+    //        -0.5f, -0.5f, 0.0f, // left
+    //        0.5f, -0.5f, 0.0f, // right
+    //        0.0f,  0.5f, 0.0f  // top
+    //};
 
     //unsigned int VBO, VAO;
     //glGenVertexArrays(1, &VAO);
@@ -153,17 +101,21 @@ int main(){
     // uncomment this call to draw in wireframe polygons.
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    Object museumWalls = Object("./misc/objects/test.obj");
+    Object museumWalls[2] = {std::string("./misc/objects/test.obj"),
+    						 std::string("./misc/objects/monkey.obj")};
+
     GLfloat Theta[3] = {0.0, 0.0, 0.0};
     GLint theta;
 
 
     // Link to out vao and prep to display ****
     glUseProgram(shaderProgram);
-    glBindVertexArray(vao);
-    museumWalls.load(shaderProgram);
+    for(int i = 0; i < 2; i++) {
+    	glBindVertexArray(vao[i]);
+    	museumWalls[i].load(shaderProgram);
+    }
 
-    glBindVertexArray(vao);
+    glBindVertexArray(vao[0]);
     theta = glGetUniformLocation(shaderProgram, "theta");
 
     glEnable(GL_DEPTH_TEST);
@@ -194,7 +146,7 @@ int main(){
         glfwSwapBuffers(window);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUniform3fv(theta, 1, Theta);
-        museumWalls.draw();
+        museumWalls[modelSelection].draw();
 
         Theta[0] += 0.1;
 
