@@ -60,8 +60,24 @@
 > We have not decided on the paintings that we plan to use. There are several paintings that can be easily textured to a simple painting frame model, however we would like to look into some more unconventional methods of displaying them. The pictures will most likely be hung on the wall inside a framed model, however, we may have a painting on the ceiling, depending on how complex it will be to texture it to a dome shape without it looking strange. 
 
 ## Weekly Scrotum 2018/2/14
-Link to .blend file [museum.blend](https://github.com/bmoral/cse389-graphics/blob/master/misc/models/museum.blend)
+> Link to .blend file [museum.blend](https://github.com/bmoral/cse389-graphics/blob/master/misc/models/museum.blend)
 
 ## Weekly Scrotum 2018/3/7
-Had issues making out program render and display obj information on to the screen.
+> Had issues making out program render and display obj information on to the screen.
 We tried recycling code from when we loaded our first triangle, and everything seemed to be correct, but it wouldn't display, from our debugging efforts we were able to determine that the obj file was loaded correctly and the VAO was also bound correctly. After many code rearrangements and rewrites, nothing would display, but as it turns out, the problem appears to had been our shader program. From what I could gather the shader program we used wasn't correctly setup for 3-D space objects. Still to do: code clean up, enable multiple objects to be loaded with user input. **Update** Attempted code clean up, and tried implementing to allow loading of two models, but only one is drawn.
+
+## Weekly Scrotum 2018/3/14
+> Due to working on compiler projects, not much work has been made that was commited. Brainstormed ideas for pictures and worked on model improvements. 
+
+## Weekly Scrotum 2018/3/28
+> Decided to do research on new developments in the project. Header files have not been implemented that were given to us. Currently Compiler work has been causing a lot of our free time to be taken. Will be making progress soon. 
+
+## Weekly Scrotum 2018/4/4
+> Worked on increasing the quality of the models that we are using. Added more high resolution development for the museum model. Compilers is lightening up a bit and we should be able to work on the project more productively. 
+
+## Weekly Scrotum 2018/4/11
+> Realized that we have not been updating the README like we should have been. Updated the readme progress. Worked on implementation of the files that were given to us two weeks ago. Compilers has been fairly busy. We will be working to catch up and finish implementation of these three things:
+ * Model importation (currently works, but not with new header files)
+ * Texturing of Models
+ * Camera movement such as looking and walking.
+ We plan to be caught back up by next week. We will be working through the weekend in order to be sure that we are caught up to the progress that we need to have by next week.
