@@ -101,7 +101,7 @@ int main(){
     // uncomment this call to draw in wireframe polygons.
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    Object museumWalls[2] = {std::string("./misc/objects/museum.obj"),
+    Object museumWalls[2] = {std::string("./misc/objects/monkey.obj"),
     						 std::string("./misc/objects/monkey.obj")};
 
     GLfloat Theta[3] = {0.0, 0.0, 0.0};
@@ -148,10 +148,10 @@ int main(){
         glUniform3fv(theta, 1, Theta);
         museumWalls[modelSelection].draw();
 
-        Theta[0] += 0.1;
+        Theta[1] += 0.1;
 
-        if(Theta[0] > 360.0) {
-        	Theta[0] -= 360.0;
+        if(Theta[1] > 360.0) {
+        	Theta[1] -= 360.0;
         }
 
         glfwPollEvents();
