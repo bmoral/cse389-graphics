@@ -101,7 +101,7 @@ int main(){
     // uncomment this call to draw in wireframe polygons.
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    Object museumWalls[2] = {std::string("./misc/objects/monkey.obj"),
+    Object museumWalls[2] = {std::string("./misc/objects/museum.obj"),
     						 std::string("./misc/objects/monkey.obj")};
 
     GLfloat Theta[3] = {0.0, 0.0, 0.0};
