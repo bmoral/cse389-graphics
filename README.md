@@ -81,3 +81,6 @@ We tried recycling code from when we loaded our first triangle, and everything s
  * Texturing of Models
  * Camera movement such as looking and walking.
  We plan to be caught back up by next week. We will be working through the weekend in order to be sure that we are caught up to the progress that we need to have by next week.
+
+## Weekly Scrotum 2018/4/18
+> Completed the design of the museum in blender.
