@@ -52,6 +52,8 @@ int main(){
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    //TODO adjust perspective. Currently undefined references
+    //gluPerspective((double)90.0,(double)110.0,(double)0.1,(double)100.0);
 
     // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -148,11 +150,15 @@ int main(){
         glUniform3fv(theta, 1, Theta);
         museumWalls[modelSelection].draw();
 
-        Theta[1] += 0.1;
+        Theta[0] += 01;
+        Theta[1] += 0.5;
 
-        if(Theta[1] > 360.0) {
-        	Theta[1] -= 360.0;
+        if(Theta[0] > 360.0) {
+        	Theta[0] -= 360.0;
         }
+        if(Theta[1] > 360.0) {
+                	Theta[1] -= 360.0;
+                }
 
         glfwPollEvents();
     }
