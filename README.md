@@ -84,3 +84,4 @@ We tried recycling code from when we loaded our first triangle, and everything s
 
 ## Weekly Scrotum 2018/4/18
 > Completed the design of the museum in blender.
+ # Note: assimp has to be linked into the linker on ide along with libraries previously mentioned here.

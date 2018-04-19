@@ -6,6 +6,7 @@
  */
 
 #include "Window.h"
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -15,7 +16,7 @@ GLFWwindow* Window::window;
  * Constructor, Creates a window using glfw libraries.
  *
  * @param width pixel length for the width.
- * @param height pixe length for the height.
+ * @param height pixel length for the height.
  * @param title title for the window to display.
  */
 Window::Window(unsigned int width = 800, unsigned int height = 600, const char* title = "default window")
@@ -33,12 +34,21 @@ Window::Window(unsigned int width = 800, unsigned int height = 600, const char* 
 	    if(window == NULL) {
 	        std::cout << "Failed to create GLFW window" << std::endl;
 	        glfwTerminate();
+	        return;
 	    }
 
 	    glfwMakeContextCurrent(window);
 	    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
+}
+
+/**
+ * Get the window for others to use
+ */
+GLFWwindow* Window::getWindow()
+{
+	return window;
 }
 
 /**

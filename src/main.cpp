@@ -1,20 +1,20 @@
 
 
 
-#include "Object.h"
-#include "Window.h"
+//#include "Object.h"
 #include "MainComponent.h"
-#include "ShaderProgram.h"
+#include "Window.h"
+//#include "ShaderProgram.h"
 //#include <glad/glad.h>
 
 //#include <iostream>
 
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
 
 int main()
 {
-	//Window Setting Variables
-	const unsigned int SCR_WIDTH = 800;
-	const unsigned int SCR_HEIGHT = 600;
+	//Window Setting constants
 	const char* TITLE = "Morales_Chavez_Museum";
 	const char* ICON = "./misc/colosseum-icon.png";
 
@@ -27,6 +27,8 @@ int main()
 	prog.start();
 	return 0;
 }
+
+
 //
 //void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 //void processInput(GLFWwindow* window);

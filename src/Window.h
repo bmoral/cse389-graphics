@@ -19,6 +19,7 @@ public:
 	static void render();
 	static bool shouldClose();
 	static void windowClean();
+	static GLFWwindow* getWindow();
 
 private:
 	static GLFWwindow* window;

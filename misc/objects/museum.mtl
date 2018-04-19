@@ -20,7 +20,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/marble-wall-texture.jpeg
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/textures/marble-wall-texture.jpeg
 
 newmtl Material.004
 Ns 96.078431
@@ -31,7 +31,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/grey-marble-floor-tile-texture-seamless.jpg
+map_Kd ./misc/textures/grey-marble-floor-tile-texture-seamless.jpg
 
 newmtl Material.006
 Ns 96.078431
@@ -42,7 +42,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/cracked-marble-wall.jpg
+map_Kd ./misc/textures/cracked-marble-wall.jpg
 
 newmtl None
 Ns 0
@@ -51,7 +51,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/wood-frame-texture-cozy-06-opt.jpg
+map_Kd ./misc/textures/wood-frame-texture-cozy-06-opt.jpg
 
 newmtl None.002
 Ns 0.000000
@@ -70,7 +70,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/paintings/LOVE-BY-THE-PALETTE.jpg
+map_Kd ./misc/textures/paintings/LOVE-BY-THE-PALETTE.jpg
 
 newmtl None_ferry-painting.jpeg
 Ns 0
@@ -79,7 +79,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/paintings/ferry-painting.jpeg
+map_Kd ./misc/textures/paintings/ferry-painting.jpeg
 
 newmtl None_finger-1.jpg
 Ns 0
@@ -88,7 +88,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/paintings/finger-1.jpg
+map_Kd ./misc/textures/paintings/finger-1.jpg
 
 newmtl None_monarch-of-the-glen-sir-edwin-landseer.jpg
 Ns 0
@@ -97,7 +97,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/paintings/monarch-of-the-glen-sir-edwin-landseer.jpg
+map_Kd ./misc/textures/paintings/monarch-of-the-glen-sir-edwin-landseer.jpg
 
 newmtl None_ocean.jpg
 Ns 0
@@ -106,7 +106,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/paintings/ocean.jpg
+map_Kd ./misc/textures/paintings/ocean.jpg
 
 newmtl None_pop-culture-characters-thrift-store-paintings-dave-pollot-1.jpg
 Ns 0
@@ -115,7 +115,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/paintings/pop-culture-characters-thrift-store-paintings-dave-pollot-1.jpg
+map_Kd ./misc/textures/paintings/pop-culture-characters-thrift-store-paintings-dave-pollot-1.jpg
 
 newmtl None_ships-painting.jpeg
 Ns 0
@@ -124,7 +124,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/textures/paintings/ships-painting.jpeg
+map_Kd ./misc/textures/paintings/ships-painting.jpeg
 
 newmtl Plant
 Ns 94.117647
@@ -135,8 +135,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/models/textures/plant col map.png
-map_Bump /home/chavezfk/cse389-graphics/misc/models/textures/plant col map.png
+map_Kd ./misc/models/textures/plant col map.png
+map_Bump ./misc/models/textures/plant col map.png
 
 newmtl Plant_NONE
 Ns 94.117647
@@ -147,8 +147,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/models/textures/plant col map.png
-map_Bump /home/chavezfk/cse389-graphics/misc/models/textures/plant col map.png
+map_Kd ./misc/models/textures/plant col map.png
+map_Bump ./misc/models/textures/plant col map.png
 
 newmtl Plant_plant_uv_map
 Ns 94.117647
@@ -159,8 +159,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/chavezfk/cse389-graphics/misc/models/textures/plant col map.png
-map_Bump /home/chavezfk/cse389-graphics/misc/models/textures/plant col map.png
+map_Kd ./misc/models/textures/plant col map.png
+map_Bump ./misc/models/textures/plant col map.png
 
 newmtl Pupil
 Ns 94.117647
