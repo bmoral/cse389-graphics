@@ -8,6 +8,9 @@
 #include "MainComponent.h"
 #include "shader.h"
 #include "model.h"
+#include "Object.h"
+#include "ShaderProgram.h"
+#include <time.h>
 
 /**
  * Initialize and instance of the engine to be not running
@@ -64,14 +67,18 @@ void MainComponent::run()
 	glfwGetWindowSize(Window::getWindow(), &width, &height);
 
 	// background color of screen
-	glClearColor(0.1f, 0.5f, 0.1f, 1.0f);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//build and compile shader
 	Shader shader("./src/model_loading.vs", "./src/model_loading.fs");
 
 	//load models
-	Model model("./misc/objects/test.obj");
+	Model model("./misc/objects/museum.obj");
+	//Object mdl("./misc/objects/test.obj");
+	GLuint sdr = ShaderProgram();
+	shader.ID = sdr;
+	//mdl.load(sdr);
 
 	// Timing
 	float lastFrame = 0.0f;
@@ -89,12 +96,14 @@ void MainComponent::run()
 	m = glm::translate(m, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
 	m = glm::scale(m, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
 	shader.setMat4("model", m);
+    shader.use();
 
 	//render loop
 	while(isRunning) {
 		//Frame time logic
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
+		//deltaTime = 100;
 		lastFrame = currentFrame;
 
 		//input processor
@@ -105,22 +114,24 @@ void MainComponent::run()
 			stop();
 
 		//enable shader
+		//glUseProgram(sdr);
 		shader.use();
 
 
-		//glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)width / (float)height, 0.1f, 100.0f);
-	    //glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)width / (float)height, 0.1f, 100.0f);
+	    glm::mat4 view = camera.GetViewMatrix();
 	    view = camera.GetViewMatrix();
-	    //shader.setMat4("projection", projection);
-	    //shader.setMat4("view", view);
+	    shader.setMat4("projection", projection);
+	    shader.setMat4("view", view);
 
 
 		//glm::mat4 m;
-		m = glm::scale(m, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
-		m = glm::translate(m, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
+		//m = glm::scale(m, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
+		//m = glm::translate(m, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
 		//shader.setMat4("model", m);
 
 		model.Draw(shader);
+		//mdl.draw();
 
 		render();
 	}
