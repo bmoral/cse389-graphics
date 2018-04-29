@@ -78,9 +78,10 @@ We tried recycling code from when we loaded our first triangle, and everything s
 ## Weekly Scrotum 2018/4/11
 > Realized that we have not been updating the README like we should have been. Updated the readme progress. Worked on implementation of the files that were given to us two weeks ago. Compilers has been fairly busy. We will be working to catch up and finish implementation of these three things:
 > * Model importation (currently works, but not with new header files)
- * Texturing of Models
- * Camera movement such as looking and walking.
- We plan to be caught back up by next week. We will be working through the weekend in order to be sure that we are caught up to the progress that we need to have by next week.
+> * Texturing of Models
+> * Camera movement such as looking and walking.  
+ 
+> We plan to be caught back up by next week. We will be working through the weekend in order to be sure that we are caught up to the progress that we need to have by next week.
 
 ## Weekly Scrotum 2018/4/18
 > Completed the design of the museum in blender.
@@ -89,11 +90,11 @@ We tried recycling code from when we loaded our first triangle, and everything s
 ## Weekly Scrotum 2018/4/25
  > After trying to rework the code to catch up and make it cleaner, and more capable we boke it, and has been broken for about 2.5 weeks now. What is currently happening is that we can open a green window, but it won't load objects, can't draw objects(obviusly), and there's a nasty screen flickering that happens while trying to render. Besides all those things not working, there have been some improvements to the previous code base such as
 > 	* New window creation class that should allow for modularity and icons 
-	* addition of new model and mesh header files that will theoretically allow better model loading capabilities, and texture loading. 
-	* addition of camera class that should allow for movement within the world. 
-	* addition of more robust shader capabilities. 
-So far things that appear to be working are the shader seems to compile and link correctly, texture loading(after days of trying to figure out shy it didn't appear to load anything to memory), and the model loader appears to load something to memeory. 
+>	* addition of new model and mesh header files that will theoretically allow better model loading capabilities, and texture loading. 
+>	* addition of camera class that should allow for movement within the world. 
+>	* addition of more robust shader capabilities. 
+> So far things that appear to be working are the shader seems to compile and link correctly, texture loading(after days of trying to figure out shy it didn't appear to load anything to memory), and the model loader appears to load something to memeory. 
 ### (update)2018/4/19 
-No matter what we did, the flickering wouldn't go away, and model loading appeared to stopped loading to memory as a side effect. Since we still had access to our old not broken but not so cool model loader (Object.h), we decided to use it to try and load the models in, after some finkicking around, we managed to load a model using the new code base, however we still had flickering issues and that model loader doesn't have texture support. 
-###(update)2018/4/28 
-Have been wokring of debugging the flickering issue for the past few days, and it just wouldn't go away. Today I decided to slow down and take a cloesr look at our old working version, and our new not working version, which are practically the same minus some oop cunctruction. Started out by moving the gladloader function from our start method into our window creation method. I don't think that is where it belongs, but it's worth a shot, and nothing. Following some advice went to check the inlcuded libraries, which were all in single "includes.h" as to only use them once, but that ended up backfiring pretty early on requiring us to include the includes.h in every class making it so that most libraries were included more than once, so I tried to fix that by only calling the needed libraries where required. This still didn't make the flickering go away, but it did change something in the window making it look like a crt screen. At this point the only difference between and a working version was that glClearColor() was outside the render loop, after I moved it back inside, everything worked like a charm. Now it was a matter of adding input processors, and modifying the window class a bit for easier value extraction of values for movement logic.  
+> No matter what we did, the flickering wouldn't go away, and model loading appeared to stopped loading to memory as a side effect. Since we still had access to our old not broken but not so cool model loader (Object.h), we decided to use it to try and load the models in, after some finkicking around, we managed to load a model using the new code base, however we still had flickering issues and that model loader doesn't have texture support. 
+### (update)2018/4/28 
+> Have been wokring of debugging the flickering issue for the past few days, and it just wouldn't go away. Today I decided to slow down and take a cloesr look at our old working version, and our new not working version, which are practically the same minus some oop cunctruction. Started out by moving the gladloader function from our start method into our window creation method. I don't think that is where it belongs, but it's worth a shot, and nothing. Following some advice went to check the inlcuded libraries, which were all in single "includes.h" as to only use them once, but that ended up backfiring pretty early on requiring us to include the includes.h in every class making it so that most libraries were included more than once, so I tried to fix that by only calling the needed libraries where required. This still didn't make the flickering go away, but it did change something in the window making it look like a crt screen. At this point the only difference between and a working version was that glClearColor() was outside the render loop, after I moved it back inside, everything worked like a charm. Now it was a matter of adding input processors, and modifying the window class a bit for easier value extraction of values for movement logic.  
