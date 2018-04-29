@@ -9,8 +9,8 @@
 int main()
 {
 	//Window Setting constants
-	const unsigned int width = 800;
-	const unsigned int height = 600;
+	const unsigned int width = 1080;
+	const unsigned int height = 607;
 	const char* TITLE = "Morales_Chavez_Museum";
 	const char* ICON = "./misc/colosseum-icon.png";
 

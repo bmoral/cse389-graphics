@@ -15,7 +15,7 @@
 #include "model.h"
 
 //create static camera
-Camera MainComponent::camera(glm::vec3(0.0f, -2.0f, 3.0f));
+Camera MainComponent::camera(glm::vec3(0.0f, -1.0f, 3.0f));
 float MainComponent::lastX = Window::SCR_WIDTH / 2.0f;
 float MainComponent::lastY = Window::SCR_HEIGHT / 2.0f;
 bool MainComponent::fmouse = true;
@@ -59,15 +59,16 @@ void MainComponent::run()
 	//change state to running
 	isRunning = true;
 
-	//set mouse call back
+	//set input mouse callback
 	glfwSetCursorPosCallback(Window::getWindow(), mouse_callback);
+	glfwSetScrollCallback(Window::getWindow(), scroll_callback);
 	glfwSetInputMode(Window::getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	//build and compile shader
 	Shader shader("./src/model_loading.vs", "./src/model_loading.fs");
 
 	//load models
-	Model model("./misc/objects/test.obj");
+	Model model("./misc/objects/museum.obj");
 
 
 	//render loop
@@ -77,7 +78,7 @@ void MainComponent::run()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		//input processor
+		//input processor (keyboard)
 		processInput(Window::getWindow());
 
 		//Close and clean up if close is requested
@@ -171,3 +172,10 @@ void MainComponent::mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
+/**
+ * mouse scroll wheel callback, to process zoom
+ */
+void MainComponent::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	camera.ProcessMouseScroll(yoffset);
+}

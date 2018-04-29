@@ -30,6 +30,7 @@ private:
 	float lastFrame = 0.0f;
 	void processInput(GLFWwindow* window);
 	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 };
 
 #endif /* MAINCOMPONENT_H_ */
