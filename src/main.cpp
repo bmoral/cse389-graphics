@@ -1,25 +1,21 @@
-
-
-
 //#include "Object.h"
 #include "MainComponent.h"
-#include "Window.h"
+//#include "Window.h"
 //#include "ShaderProgram.h"
 //#include <glad/glad.h>
 
 //#include <iostream>
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
-
 int main()
 {
 	//Window Setting constants
+	const unsigned int width = 800;
+	const unsigned int height = 600;
 	const char* TITLE = "Morales_Chavez_Museum";
 	const char* ICON = "./misc/colosseum-icon.png";
 
 	//Create window
-	Window window(SCR_WIDTH, SCR_HEIGHT, TITLE);
+	Window window(width, height,TITLE);
 	window.setIcon(ICON);
 
 	//Execute actual program

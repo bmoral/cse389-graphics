@@ -11,6 +11,8 @@
 #include "stb_image.h"
 
 GLFWwindow* Window::window;
+unsigned int Window::SCR_WIDTH;
+unsigned int Window::SCR_HEIGHT;
 
 /**
  * Constructor, Creates a window using glfw libraries.
@@ -21,6 +23,9 @@ GLFWwindow* Window::window;
  */
 Window::Window(unsigned int width = 800, unsigned int height = 600, const char* title = "default window")
 {
+		SCR_WIDTH = width;
+		SCR_HEIGHT = height;
+
 	    // glfw: initialize and configure
 	    // ------------------------------
 	    glfwInit();
@@ -40,6 +45,15 @@ Window::Window(unsigned int width = 800, unsigned int height = 600, const char* 
 	    glfwMakeContextCurrent(window);
 	    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+
+		// glad: load all OpenGL function pointers
+		if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+			std::cout << "Failed to initialize GLAD" << std::endl;
+			return;
+		}
+
+		//Configure global opengl state
+		glEnable(GL_DEPTH_TEST);
 
 }
 
@@ -103,6 +117,9 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and
     // height will be significantly larger than specified on retina displays.
+	Window::SCR_WIDTH = width;
+	Window::SCR_HEIGHT = height;
+
     glViewport(0,0,width, height);
 }
 

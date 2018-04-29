@@ -8,7 +8,11 @@
 #ifndef WINDOW_H_
 #define WINDOW_H_
 
-#include "includes.h"
+//#include "includes.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+#include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -20,6 +24,8 @@ public:
 	static bool shouldClose();
 	static void windowClean();
 	static GLFWwindow* getWindow();
+	static unsigned int SCR_WIDTH;
+	static unsigned int SCR_HEIGHT;
 
 private:
 	static GLFWwindow* window;

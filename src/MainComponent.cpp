@@ -6,11 +6,19 @@
  */
 
 #include "MainComponent.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "shader.h"
 #include "model.h"
-#include "Object.h"
-#include "ShaderProgram.h"
-#include <time.h>
+
+//create static camera
+Camera MainComponent::camera(glm::vec3(0.0f, -2.0f, 3.0f));
+float MainComponent::lastX = Window::SCR_WIDTH / 2.0f;
+float MainComponent::lastY = Window::SCR_HEIGHT / 2.0f;
+bool MainComponent::fmouse = true;
 
 /**
  * Initialize and instance of the engine to be not running
@@ -27,17 +35,6 @@ void MainComponent::start()
 	//if running turn ignore and do nothing
 	if(isRunning)
 		return;
-
-	//execute code to initialize and start program
-
-	// glad: load all OpenGL function pointers
-	if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		return;
-	}
-
-	//Configure global opengl state
-	glEnable(GL_DEPTH_TEST);
 
 	//Run 3d rendering
 	run();
@@ -62,48 +59,22 @@ void MainComponent::run()
 	//change state to running
 	isRunning = true;
 
-	//get screen dimensions
-	int width, height;
-	glfwGetWindowSize(Window::getWindow(), &width, &height);
-
-	// background color of screen
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//set mouse call back
+	glfwSetCursorPosCallback(Window::getWindow(), mouse_callback);
+	glfwSetInputMode(Window::getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	//build and compile shader
 	Shader shader("./src/model_loading.vs", "./src/model_loading.fs");
 
 	//load models
-	Model model("./misc/objects/museum.obj");
-	//Object mdl("./misc/objects/test.obj");
-	GLuint sdr = ShaderProgram();
-	shader.ID = sdr;
-	//mdl.load(sdr);
+	Model model("./misc/objects/test.obj");
 
-	// Timing
-	float lastFrame = 0.0f;
-
-	//input
-	camera = Camera(glm::vec3(0.0f, 0.0f, 1.0f));
-
-	glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)width / (float)height, 0.1f, 100.0f);
-    glm::mat4 view = camera.GetViewMatrix();
-    shader.setMat4("projection", projection);
-    shader.setMat4("view", view);
-
-
-	glm::mat4 m;
-	m = glm::translate(m, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
-	m = glm::scale(m, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
-	shader.setMat4("model", m);
-    shader.use();
 
 	//render loop
 	while(isRunning) {
 		//Frame time logic
 		float currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
-		//deltaTime = 100;
 		lastFrame = currentFrame;
 
 		//input processor
@@ -113,25 +84,27 @@ void MainComponent::run()
 		if(Window::shouldClose())
 			stop();
 
+		// background color of screen
+		glClearColor(0.1f, 0.1f, 0.5f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		//enable shader
-		//glUseProgram(sdr);
 		shader.use();
 
 
-		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)width / (float)height, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Window::SCR_WIDTH / (float)Window::SCR_HEIGHT, 0.1f, 100.0f);
 	    glm::mat4 view = camera.GetViewMatrix();
-	    view = camera.GetViewMatrix();
+	    //view = camera.GetViewMatrix();
 	    shader.setMat4("projection", projection);
 	    shader.setMat4("view", view);
 
 
-		//glm::mat4 m;
-		//m = glm::scale(m, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
-		//m = glm::translate(m, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
-		//shader.setMat4("model", m);
+		glm::mat4 m;
+		m = glm::translate(m, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
+		m = glm::scale(m, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
+		shader.setMat4("model", m);
 
 		model.Draw(shader);
-		//mdl.draw();
 
 		render();
 	}
@@ -174,3 +147,27 @@ void MainComponent::processInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     	camera.ProcessKeyboard(RIGHT, deltaTime);
 }
+
+/**
+ * Whenever mouse is moved, this is called
+ */
+void MainComponent::mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	float xoffset = 0.0;
+	float yoffset = 0.0;
+
+	if (fmouse){
+		lastX = xpos;
+		lastY = ypos;
+		fmouse = false;
+	}
+
+	xoffset = xpos - lastX;
+	yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+	lastX = xpos;
+	lastY = ypos;
+
+	camera.ProcessMouseMovement(xoffset, yoffset);
+}
+

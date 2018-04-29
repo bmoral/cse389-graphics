@@ -22,9 +22,14 @@ private:
 	void render();
 	void cleanUp();
 	bool isRunning;
+	static Camera camera;
+	static float lastX;
+	static float lastY;
+	static bool fmouse;
 	float deltaTime = 0.0f;
-	Camera camera;
+	float lastFrame = 0.0f;
 	void processInput(GLFWwindow* window);
+	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 };
 
 #endif /* MAINCOMPONENT_H_ */
