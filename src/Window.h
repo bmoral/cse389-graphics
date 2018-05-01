@@ -24,11 +24,14 @@ public:
 	static bool shouldClose();
 	static void windowClean();
 	static GLFWwindow* getWindow();
+	static void setFullscreen();
 	static unsigned int SCR_WIDTH;
 	static unsigned int SCR_HEIGHT;
 
 private:
 	static GLFWwindow* window;
+	static int dxpos, dypos;
+	static int dwidth, dheight;
 
 };
 

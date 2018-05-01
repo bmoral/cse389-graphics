@@ -1,0 +1,34 @@
+# Blender MTL File: 'plant.blend'
+# Material Count: 3
+
+newmtl None
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+
+newmtl Plant
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/textures/plant_col_map.png
+map_Bump /home/bmorales/eclipse-workspace/cse389-graphics/misc/models/textures/plant col map.png
+
+newmtl Plant_NONE
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump /home/bmorales/eclipse-workspace/cse389-graphics/misc/models/textures/plant col map.png
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/models/textures/plant col map.png

@@ -13,6 +13,8 @@
 GLFWwindow* Window::window;
 unsigned int Window::SCR_WIDTH;
 unsigned int Window::SCR_HEIGHT;
+int Window::dxpos, Window::dypos;
+int Window::dwidth, Window::dheight;
 
 /**
  * Constructor, Creates a window using glfw libraries.
@@ -55,6 +57,26 @@ Window::Window(unsigned int width = 800, unsigned int height = 600, const char* 
 		//Configure global opengl state
 		glEnable(GL_DEPTH_TEST);
 
+}
+
+/**
+ * switches the window mode to full screen
+ */
+void Window::setFullscreen()
+{
+	GLFWmonitor* monitor = glfwGetWindowMonitor(window);
+	std::cout << "Fullscreen called" << std::endl;
+
+	if(monitor) {
+		glfwSetWindowMonitor(window, NULL, dxpos, dypos, dwidth, dheight, 0);
+	}
+	else {
+		glfwGetWindowPos(window, &dxpos, &dypos);
+		glfwGetWindowSize(window, &dwidth, &dheight);
+		monitor = glfwGetPrimaryMonitor();
+		const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+		glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate );
+	}
 }
 
 /**

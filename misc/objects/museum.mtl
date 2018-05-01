@@ -10,6 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/textures/wood-frame-texture-cozy-06-opt.jpg
 
 newmtl Material
 Ns 94.117647
@@ -20,7 +21,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/textures/marble-wall-texture.jpeg
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/textures/paintings/finger-1.jpg
 
 newmtl Material.004
 Ns 96.078431
@@ -171,6 +172,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/models/textures/plant col map.png
 
 newmtl Shoes
 Ns 94.117647
@@ -181,6 +183,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/textures/plant_col_map.png
 
 newmtl eyeball
 Ns 94.117647
@@ -191,6 +194,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/textures/plant_col_map.png
 
 newmtl iris
 Ns 94.117647
@@ -201,3 +205,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd /home/bmorales/eclipse-workspace/cse389-graphics/misc/models/textures/plant col map.png

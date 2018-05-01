@@ -136,9 +136,10 @@ void MainComponent::cleanUp()
  */
 void MainComponent::processInput(GLFWwindow* window)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	static int oldstate = GLFW_RELEASE;
+    int newstate;
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
-
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera.ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -147,6 +148,12 @@ void MainComponent::processInput(GLFWwindow* window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     	camera.ProcessKeyboard(RIGHT, deltaTime);
+
+    newstate = glfwGetKey(window, GLFW_KEY_F11);
+    if (newstate == GLFW_RELEASE && oldstate == GLFW_PRESS) {
+    	Window::setFullscreen();
+    }
+    oldstate = newstate;
 }
 
 /**
